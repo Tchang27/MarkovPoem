@@ -7,9 +7,6 @@ class Vertex():
         self.list_neighbors = []
         self.list_weights = []
     
-    def add_edge_to(self, vertex, weight = 0):
-        self.neighbors[vertex] = weight
-    
     def increment_edge(self, vertex, val = 1):
         self.neighbors[vertex] = self.neighbors.get(vertex, 0) + val
 
