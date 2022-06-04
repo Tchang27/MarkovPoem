@@ -16,8 +16,8 @@ Known Issues/Bugs:
 Grammar rules are still being ironed out, as the generated lines
 usually output nonsensical words around half the time
 
-Working on comma placement, uncomment out code in write_line
-to test out functionality (still having issues)
+Working on comma placement, still having issues with commas
+in relation to independent/dependent clauses
 
 Libraries Needed:
 requests
