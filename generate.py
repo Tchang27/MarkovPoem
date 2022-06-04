@@ -14,6 +14,7 @@ def grab_words(path):
     with open(path, 'r') as f:
         text = f.read()
         text = re.sub(r'\[(.+)\]', ' ', text)
+        text = re.sub(r'^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', ' ', text)
         text = ' '.join(text.split())
         text = text.lower()
         text = text.translate(str.maketrans('','', string.punctuation))
@@ -114,12 +115,12 @@ def clean_line(line):
 
 def main(length):
     #for scraping
-    scraper = Scraper()
-    words = scraper.scrape_poems('https://www.gutenberg.org/files/12242/12242-h/12242-h.htm')
+    # scraper = Scraper()
+    # words = scraper.scrape_poems('https://www.gutenberg.org/files/12242/12242-h/12242-h.htm')
 
     #for text document
-    # words = []
-    # words = grab_words('path')
+    words = []
+    words = grab_words('dickinson_poems.txt')
 
     #make graph
     graph = generate_graph(words)
