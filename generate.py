@@ -97,7 +97,7 @@ def write_line(graph: Graph, words, count = 10):
     return line
 
 
-def main():
+def main(length):
     #get words
     scraper = Scraper()
     #list of
@@ -107,10 +107,10 @@ def main():
     graph = generate_graph(words)
 
     #use graph to generate a line, input miminmum word count
-    generated_line = write_line(graph, words, 12)
+    generated_line = write_line(graph, words, length)
     
     #print line
     return ' '.join(generated_line)
 
 if __name__ == '__main__':
-    print(main())
+    print(main(8))
