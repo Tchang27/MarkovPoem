@@ -85,7 +85,6 @@ def clean_line(line):
             elif not contains_object:
                 contains_object = True
             elif not determiner:
-                print("here" + str(i))
                 prev_item = list(line[i-1])
                 prev_item[0] = str(prev_item[0]) + ','
                 line[i-1] = (prev_item[0], prev_item[1])
