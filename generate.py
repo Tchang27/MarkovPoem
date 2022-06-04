@@ -114,9 +114,13 @@ def clean_line(line):
 
 
 def main(length):
-    #for poems
+    #for scraping
     scraper = Scraper()
     words = scraper.scrape_poems('https://www.gutenberg.org/files/12242/12242-h/12242-h.htm')
+
+    #for text document
+    # words = []
+    # words = grab_words('path')
 
     #make graph
     graph = generate_graph(words)
