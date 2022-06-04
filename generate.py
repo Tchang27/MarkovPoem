@@ -4,9 +4,22 @@ from graph import Graph, Vertex
 import random
 import nltk
 from nltk.corpus import stopwords
+import re
+import string
 
 STOP_WORDS = set(stopwords.words('english'))
 
+#function if i need to grab words from a text document instead of scraping website
+def grab_words(path):
+    with open(path, 'r') as f:
+        text = f.read()
+        text = re.sub(r'\[(.+)\]', ' ', text)
+        text = ' '.join(text.split())
+        text = text.lower()
+        text = text.translate(str.maketrans('','', string.punctuation))
+
+    words = text.split()
+    return words
 
 def generate_graph(words):
     g = Graph()
@@ -101,11 +114,10 @@ def clean_line(line):
 
 
 def main(length):
-    #get words
+    #for poems
     scraper = Scraper()
-    #list of
     words = scraper.scrape_poems('https://www.gutenberg.org/files/12242/12242-h/12242-h.htm')
-    
+
     #make graph
     graph = generate_graph(words)
 
