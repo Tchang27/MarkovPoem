@@ -54,47 +54,47 @@ def write_line(graph: Graph, words, count = 10):
         last_word = word.value
         word = graph.get_next_word(word)
 
-    line = nltk.pos_tag(line)
+    # line = nltk.pos_tag(line)
 
-    for i in range(len(line)):
-        item = list(line[i])
-        if item[1] == 'DT' or item[1] == 'PRP$' or item[1] == 'PDT' :
-            determiner = True
-        if item[1][0] == 'V':
-            if not contains_verb:
-                contains_verb = True
-        if item[1][0] == 'N' or item[1] == 'PRP':
-            if not contains_subject:
-                contains_subject = True
-            elif not contains_object:
-                contains_object = True
-            elif not determiner:
-                print("here" + str(i))
-                prev_item = list(line[i-1])
-                prev_item[0] = str(prev_item[0]) + ','
-                line[i-1] = (prev_item[0], prev_item[1])
-                contains_verb = False
-                contains_subject = False
-                contains_object = False
-        if contains_verb and contains_subject and contains_object:
-            complete_clause = True
-            contains_verb = False
-            contains_subject = False
-            contains_object = False
-        if complete_clause:
-            item[0] = str(item[0]) + ','
-            line[i] = (item[0], item[1])
-            contains_verb = False
-            contains_subject = False
-            contains_object = False
-            determiner = False
-            complete_clause = False
+    # for i in range(len(line)):
+    #     item = list(line[i])
+    #     if item[1] == 'DT' or item[1] == 'PRP$' or item[1] == 'PDT' :
+    #         determiner = True
+    #     if item[1][0] == 'V':
+    #         if not contains_verb:
+    #             contains_verb = True
+    #     if item[1][0] == 'N' or item[1] == 'PRP':
+    #         if not contains_subject:
+    #             contains_subject = True
+    #         elif not contains_object:
+    #             contains_object = True
+    #         elif not determiner:
+    #             print("here" + str(i))
+    #             prev_item = list(line[i-1])
+    #             prev_item[0] = str(prev_item[0]) + ','
+    #             line[i-1] = (prev_item[0], prev_item[1])
+    #             contains_verb = False
+    #             contains_subject = False
+    #             contains_object = False
+    #     if contains_verb and contains_subject and contains_object:
+    #         complete_clause = True
+    #         contains_verb = False
+    #         contains_subject = False
+    #         contains_object = False
+    #     if complete_clause:
+    #         item[0] = str(item[0]) + ','
+    #         line[i] = (item[0], item[1])
+    #         contains_verb = False
+    #         contains_subject = False
+    #         contains_object = False
+    #         determiner = False
+    #         complete_clause = False
     
-    corrected_line = []
-    for item in line:
-        corrected_line.append(item[0])
+    # corrected_line = []
+    # for item in line:
+    #     corrected_line.append(item[0])
 
-    return corrected_line
+    return line
 
 
 def main():
