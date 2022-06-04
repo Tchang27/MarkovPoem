@@ -1,5 +1,4 @@
 from distutils.command.clean import clean
-from pickle import STOP
 from scrape import Scraper
 from graph import Graph, Vertex
 import random
@@ -56,7 +55,7 @@ def write_line(graph: Graph, words, count = 10):
         word = graph.get_next_word(word)
 
     line = nltk.pos_tag(line)
-    print(line)
+
     for i in range(len(line)):
         item = list(line[i])
         if item[1] == 'DT' or item[1] == 'PRP$' or item[1] == 'PDT' :

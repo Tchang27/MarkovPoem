@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import lxml
-import string
 
 class Scraper:
     def __init__(self):
