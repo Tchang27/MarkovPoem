@@ -13,8 +13,13 @@ STOP_WORDS = set(stopwords.words('english'))
 def grab_words(path):
     with open(path, 'r') as f:
         text = f.read()
+
+        #removes punctuation
         text = re.sub(r'\[(.+)\]', ' ', text)
-        text = re.sub(r'^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', ' ', text)
+        #removes roman numerals
+        text = re.sub(r'(?=\b[MCDXLVI]{1,6}\b)M{0,4}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})(.)', ' ', text)
+        #removes hyphens
+        text = re.sub(r'[—]', ' ', text)
         text = ' '.join(text.split())
         text = text.lower()
         text = text.translate(str.maketrans('','', string.punctuation))
@@ -127,10 +132,11 @@ def main(length):
 
     #use graph to generate a line, input miminmum word count
     generated_line = write_line(graph, words, length)
+    #this cleans the line using my own grammar rules - STILL INCOMPLETE/HAS BUGS
     punct_line = clean_line(generated_line)
     
     #print line
     return ' '.join(punct_line)
 
 if __name__ == '__main__':
-    print(main(12))
+    print(main(10))

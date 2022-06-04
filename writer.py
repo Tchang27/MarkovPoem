@@ -9,8 +9,17 @@ def write_lines_to_file(path, num):
 
     f.close()
 
+def write_paragraph(path, num):
+    f = open(path, 'w')
+
+    f.write(main(num) + "\n")
+
+    f.close()
+
 if __name__ == '__main__':
     start_time = time.time()
     write_lines_to_file('generate_lines.txt', 100)
+    #write_paragraph('generate_lines.txt', 100)
     end_time = time.time()
     print("Time to execute: " + str(end_time-start_time))
+
