@@ -156,13 +156,21 @@ class Generator:
         previous_pos = None
 
         line = nltk.pos_tag(line)
-        print(line)
 
         for i in range(len(line)):
             item = list(line[i])
 
+            #checking cases based on POS
             if item[1] == 'DT' or item[1] == 'PRP$' or item[1] == 'PDT' :
                 determiner = True
+                if previous_pos:
+                    if previous_pos[0] == 'N':
+                        prev_item = list(line[i-1])
+                        prev_item[0] = str(prev_item[0]) + ','
+                        line[i-1] = (prev_item[0], prev_item[1])
+                        contains_verb = False
+                        contains_subject = False
+                        contains_object = False
             elif item[1][0] == 'V':
                 if not contains_verb:
                     contains_verb = True
@@ -172,25 +180,31 @@ class Generator:
                 elif not contains_object:
                     contains_object = True
                 #only want to add comma if not preceded by a determiner like 'a' or 'the'
-                elif previous_pos != 'DETERMINER' and (previous_pos[0] == 'N' or previous_pos == 'PRP'):
-                    prev_item = list(line[i-1])
-                    prev_item[0] = str(prev_item[0]) + ','
-                    line[i-1] = (prev_item[0], prev_item[1])
-                    contains_verb = False
-                    contains_subject = False
-                    contains_object = False
+                elif previous_pos:
+                    if previous_pos != 'DETERMINER' and (previous_pos[0] == 'N' or previous_pos == 'PRP'):
+                        prev_item = list(line[i-1])
+                        prev_item[0] = str(prev_item[0]) + ','
+                        line[i-1] = (prev_item[0], prev_item[1])
+                        contains_verb = False
+                        contains_subject = False
+                        contains_object = False
+           
             #complete clause and doesn't end on a determiner
             if contains_verb and contains_subject and contains_object and not determiner:
                 complete_clause = True
                 contains_verb = False
                 contains_subject = False
                 contains_object = False
+            
             #if complete clause and it does not end on a verb or doesn't end on a preposition, add comma
             #however, don't add comma if last word
             if(i < len(line)-1):
+                next_word = line[i+1]
+                next_pos = next_word[1]
+
                 if complete_clause and item[1][0] != 'V' and not determiner \
-                    and item[1] != 'PRP' and previous_pos[0] != 'J':
-                    print(i)
+                    and item[1] != 'PRP' and previous_pos[0] != 'J' and next_pos != 'IN'\
+                    and next_pos[0] != 'V':
                     if(item[1] != 'IN'):
                         if item[1] == 'CC':
                             prev_item = list(line[i-1])
@@ -204,12 +218,20 @@ class Generator:
                     contains_object = False
                     determiner = False
                     complete_clause = False
+
+            #check case of leading clause
+            if i > 0:
+                if not complete_clause and contains_verb and item[1] == 'IN':
+                    prev_item = list(line[i-1])
+                    prev_item[0] = str(prev_item[0]) + ','
+                    line[i-1] = (prev_item[0], prev_item[1])
             #set determiner to false again before iterating
             if determiner:
                 previous_pos = 'DETERMINER' 
                 determiner = False
             else:
                 previous_pos = item[1] 
+
         
         corrected_line = []
         for item in line:
