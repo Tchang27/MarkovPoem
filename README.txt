@@ -19,6 +19,7 @@ How to Run:
     bs4
     lxml
     nltk
+    language_tool_python
 
 Known Issues/Bugs:
     Grammar rules are still being ironed out, as the generated lines
@@ -26,6 +27,8 @@ Known Issues/Bugs:
 
     Working on comma placement, still having issues with commas
     in relation to independent/dependent clauses
+
+    ***Still working on documentation
 
 
 Acknowledgments:

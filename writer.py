@@ -2,22 +2,30 @@ from generate import Generator
 import time
 import language_tool_python
 
-def write_lines_to_file(g, path, num):
+def write_lines_to_file(g, path, line_num, word_count):
+    '''
+    Writes generated lines to file along with grammatical accuracy
+
+    Parameters:
+    g: Markov Chain graph
+    path: file path to text file to write to
+    line_num: number of lines to be generated
+    word_count: minimum number of words per generated line
+    '''
     my_tool = language_tool_python.LanguageTool('en-US')  
     num_matches = 0
     f = open(path, 'w')
 
-    for _ in range(num):
-        line = g.generate(12)
+    for _ in range(line_num):
+        line = g.generate(word_count)
         my_matches = my_tool.check(line) 
         if(len(my_matches) > 0):
             num_matches += 1 
         f.write(line + "\n")
-        f.write(str(my_matches) + "\n")
     
-    f.write('Precent grammar accuracy according to LanguageTool: ' + str(((num-num_matches)/num)*100))
+    f.write('Precent grammatical accuracy according to LanguageTool: ' + str(((line_num-num_matches)/line_num)*100))
+
     f.close()
-    return (num_matches/num)*100
 
 def write_paragraph(g, path, num):
     f = open(path, 'w')
@@ -50,7 +58,7 @@ if __name__ == '__main__':
     start_time = time.time()
     generator = Generator()
     #write lines to file w/ accuracy show at the end
-    write_lines_to_file(generator, 'generate_lines.txt', 100)
+    write_lines_to_file(generator, 'generate_lines.txt', 100, 8)
 
     #write a paragraph to file
     #write_paragraph(generator, 'generate_lines.txt', 100)

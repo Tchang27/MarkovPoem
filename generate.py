@@ -1,5 +1,4 @@
 from distutils.command.build_scripts import first_line_re
-from multiprocessing.dummy import current_process
 from scrape import Scraper
 from graph import Graph, Vertex
 import random
@@ -7,7 +6,6 @@ import nltk
 from nltk.corpus import stopwords
 import re
 import string
-import time
 
 STOP_WORDS = set(stopwords.words('english'))
 
