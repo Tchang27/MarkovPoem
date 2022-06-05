@@ -1,3 +1,4 @@
+from distutils.command.build_scripts import first_line_re
 from multiprocessing.dummy import current_process
 from scrape import Scraper
 from graph import Graph, Vertex
@@ -36,7 +37,8 @@ class Generator:
             text = re.sub(r'[—]', ' ', text)
             text = ' '.join(text.split())
             text = text.lower()
-            text = text.translate(str.maketrans('','', string.punctuation))
+            my_punctuation = string.punctuation.replace("'", "")
+            text = text.translate(str.maketrans('','', my_punctuation))
 
         words = text.split()
 
@@ -156,7 +158,11 @@ class Generator:
         
         corrected_line = []
         for item in line:
-            corrected_line.append(item[0])
+            if len(corrected_line) < 1:
+                    first_word = item[0].capitalize()
+                    corrected_line.append(first_word)
+            else:
+                corrected_line.append(item[0])
 
         return corrected_line
 
