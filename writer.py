@@ -55,7 +55,6 @@ def sample_generations(g, num_samples, line_num, word_count):
     print("Average accuracy: " + str(accuracy))
     
     
-
 if __name__ == '__main__':
     start_time = time.time()
     generator = Generator()

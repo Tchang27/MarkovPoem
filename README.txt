@@ -13,6 +13,7 @@ How to Run:
         In the constructor, uncomment lines 17/18 to use scraper; else, the Markov chain 
         will be built using the text document of emily dickinson's poems
     Run writer.py to generate phrases and write them to a text file
+        Can measure accuracy of line generator by running sample_generations()
 
     Libraries Needed:
     requests
@@ -28,8 +29,6 @@ Known Issues/Bugs:
     Working on comma placement, still having issues with commas
     in relation to independent/dependent clauses
 
-    ***Still working on documentation
-
 
 Acknowledgments:
-Project inspired by Kylie Ying, https://www.youtube.com/watch?v=8ext9G7xspg
+markov Chain data structure representation inspired by Kylie Ying, https://www.youtube.com/watch?v=8ext9G7xspg
