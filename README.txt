@@ -10,9 +10,15 @@ Overview:
 How to Run:
     Run generate.py to generate phrases
         Can either scrape from website, or use text document
+        In the constructor, uncomment lines 17/18 to use scraper; else, the Markov chain 
+        will be built using the text document of emily dickinson's poems
     Run writer.py to generate phrases and write them to a text file
 
-    Note: Will need to install libraries in order to work
+    Libraries Needed:
+    requests
+    bs4
+    lxml
+    nltk
 
 Known Issues/Bugs:
     Grammar rules are still being ironed out, as the generated lines
@@ -21,8 +27,6 @@ Known Issues/Bugs:
     Working on comma placement, still having issues with commas
     in relation to independent/dependent clauses
 
-Libraries Needed:
-requests
-bs4
-lxml
-nltk
+
+Acknowledgments:
+Project inspired by Kylie Ying, https://www.youtube.com/watch?v=8ext9G7xspg

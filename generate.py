@@ -127,14 +127,15 @@ class Generator:
                     contains_subject = True
                 elif not contains_object:
                     contains_object = True
-                # elif previous_pos != 'DETERMINER':
-                #     prev_item = list(line[i-1])
-                #     prev_item[0] = str(prev_item[0]) + ','
-                #     line[i-1] = (prev_item[0], prev_item[1])
-                #     contains_verb = False
-                #     contains_subject = False
-                #     contains_object = False
-            if contains_verb and contains_subject and contains_object and previous_pos != 'DETERMINER' and previous_pos != 'DT':
+                elif previous_pos != 'DETERMINER':
+                    prev_item = list(line[i-1])
+                    prev_item[0] = str(prev_item[0]) + ','
+                    line[i-1] = (prev_item[0], prev_item[1])
+                    contains_verb = False
+                    contains_subject = False
+                    contains_object = False
+            if contains_verb and contains_subject and contains_object and previous_pos != 'DETERMINER' \
+                and previous_pos != 'DT' and not determiner:
                 complete_clause = True
                 contains_verb = False
                 contains_subject = False
