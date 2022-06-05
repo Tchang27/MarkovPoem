@@ -31,4 +31,4 @@ Known Issues/Bugs:
 
 
 Acknowledgments:
-markov Chain data structure representation inspired by Kylie Ying, https://www.youtube.com/watch?v=8ext9G7xspg
+Markov Chain data structure representation inspired by Kylie Ying, https://www.youtube.com/watch?v=8ext9G7xspg
