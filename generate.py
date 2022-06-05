@@ -17,11 +17,11 @@ class Generator:
         '''
         Constructor for Generator
         '''
-        #for scraping
+        #for scraping the first lines of every poem
         # scraper = Scraper()
         # self.words = scraper.scrape_poems('https://www.gutenberg.org/files/12242/12242-h/12242-h.htm')
 
-        #for text document
+        #for text document, which contains all of her poems in their entirety
         self.words = []
         self.words = self.grab_words('dickinson_poems.txt')
 
@@ -156,6 +156,7 @@ class Generator:
         previous_pos = None
 
         line = nltk.pos_tag(line)
+        print(line)
 
         for i in range(len(line)):
             item = list(line[i])
@@ -170,27 +171,40 @@ class Generator:
                     contains_subject = True
                 elif not contains_object:
                     contains_object = True
-                elif previous_pos != 'DETERMINER':
+                #only want to add comma if not preceded by a determiner like 'a' or 'the'
+                elif previous_pos != 'DETERMINER' and (previous_pos[0] == 'N' or previous_pos == 'PRP'):
                     prev_item = list(line[i-1])
                     prev_item[0] = str(prev_item[0]) + ','
                     line[i-1] = (prev_item[0], prev_item[1])
                     contains_verb = False
                     contains_subject = False
                     contains_object = False
-            if contains_verb and contains_subject and contains_object and previous_pos != 'DETERMINER' \
-                and previous_pos != 'DT' and not determiner:
+            #complete clause and doesn't end on a determiner
+            if contains_verb and contains_subject and contains_object and not determiner:
                 complete_clause = True
                 contains_verb = False
                 contains_subject = False
                 contains_object = False
-            if complete_clause:
-                item[0] = str(item[0]) + ','
-                line[i] = (item[0], item[1])
-                contains_verb = False
-                contains_subject = False
-                contains_object = False
-                determiner = False
-                complete_clause = False
+            #if complete clause and it does not end on a verb or doesn't end on a preposition, add comma
+            #however, don't add comma if last word
+            if(i < len(line)-1):
+                if complete_clause and item[1][0] != 'V' and not determiner \
+                    and item[1] != 'PRP' and previous_pos[0] != 'J':
+                    print(i)
+                    if(item[1] != 'IN'):
+                        if item[1] == 'CC':
+                            prev_item = list(line[i-1])
+                            prev_item[0] = str(prev_item[0]) + ','
+                            line[i-1] = (prev_item[0], prev_item[1])
+                        else:
+                            item[0] = str(item[0]) + ','
+                            line[i] = (item[0], item[1])
+                    contains_verb = False
+                    contains_subject = False
+                    contains_object = False
+                    determiner = False
+                    complete_clause = False
+            #set determiner to false again before iterating
             if determiner:
                 previous_pos = 'DETERMINER' 
                 determiner = False
