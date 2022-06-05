@@ -1,6 +1,5 @@
-from distutils.command.build_scripts import first_line_re
 from scrape import Scraper
-from graph import Graph, Vertex
+from graph import Graph
 import random
 import nltk
 from nltk.corpus import stopwords
@@ -9,12 +8,18 @@ import string
 
 STOP_WORDS = set(stopwords.words('english'))
 
-#function if i need to grab words from a text document instead of scraping website
 class Generator:
+    '''
+    Generator - object that constructs a Markov chain either by scraping a website 
+    or reading a text document, then uses its to generate a line of poetry
+    '''
     def __init__(self):
+        '''
+        Constructor for Generator
+        '''
         #for scraping
         # scraper = Scraper()
-        # words = scraper.scrape_poems('https://www.gutenberg.org/files/12242/12242-h/12242-h.htm')
+        # self.words = scraper.scrape_poems('https://www.gutenberg.org/files/12242/12242-h/12242-h.htm')
 
         #for text document
         self.words = []
@@ -24,6 +29,15 @@ class Generator:
         self.graph = self.generate_graph(self.words)
 
     def grab_words(self,path):
+        '''
+        Function that reads in words from a text file
+
+        Parameters:
+        path - directory path to text file
+
+        Returns:
+        A list of strings
+        '''
         with open(path, 'r') as f:
             text = f.read()
 
@@ -43,6 +57,15 @@ class Generator:
         return words
 
     def generate_graph(self,words):
+        '''
+        Function that generates a Graph object given a lsit of words
+
+        Parameters:
+        words - lsit of strings
+
+        Returns:
+        A Graph object
+        '''
         g = Graph()
         words = nltk.pos_tag(words)
 
@@ -78,6 +101,17 @@ class Generator:
         return g
 
     def write_line(self, graph: Graph, words, count = 10):
+        '''
+        Function that generates a line of poetry using Markov Chain
+
+        Parameters:
+        graph - Graph object
+        words - list of strings
+        count - minimum number of words in a line
+
+        Returns:
+        A list of words
+        '''
         line = []
 
         #for the inputted number of words, generate a line using graph
@@ -105,6 +139,15 @@ class Generator:
         return line
 
     def clean_line(self, line):
+        '''
+        Function that adds commas to make generated line more readable
+
+        Parameters:
+        line - list of strings
+
+        Returns:
+        A list of strings
+        '''
         contains_verb = False
         contains_subject = False
         contains_object = False
@@ -166,6 +209,15 @@ class Generator:
 
 
     def generate(self, length):
+        '''
+        Function that generates a punctuated line using Markov Chain
+
+        Parameters:
+        length - minimum number of words in a line
+
+        Returns:
+        A string
+        '''
         #use graph to generate a line, input miminmum word count
         generated_line = self.write_line(self.graph, self.words, length)
 

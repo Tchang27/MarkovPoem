@@ -27,14 +27,16 @@ def write_lines_to_file(g, path, line_num, word_count):
 
     f.close()
 
-def write_paragraph(g, path, num):
-    f = open(path, 'w')
+def sample_generations(g, num_samples, line_num, word_count):
+    '''
+    Function that averages grammatical accuracy of generated lines
 
-    f.write(g.generate(num) + "\n")
-
-    f.close()
-
-def sample_generations(g, num_samples, line_num):
+    Parameters:
+    g - Markov Chain
+    num_smaples - number of samples of generated lines
+    line_num - number of generated lines per sample
+    word_count - number of minimum words per line
+    '''
     my_tool = language_tool_python.LanguageTool('en-US')  
     accuracy = 0
 
@@ -42,7 +44,7 @@ def sample_generations(g, num_samples, line_num):
     for _ in range(num_samples):
         num_matches = 0
         for _ in range(line_num):
-            line = g.generate(12)
+            line = g.generate(word_count)
             my_matches = my_tool.check(line) 
             if(len(my_matches) > 0):
                 num_matches += 1 
@@ -60,14 +62,11 @@ if __name__ == '__main__':
     #write lines to file w/ accuracy show at the end
     write_lines_to_file(generator, 'generate_lines.txt', 100, 8)
 
-    #write a paragraph to file
-    #write_paragraph(generator, 'generate_lines.txt', 100)
-
     #gather 100 samples of 100 lines, and average accuracy
     # accuracy = 0
     # num_samples = 100
     # line_num = 100
-    # sample_generations(generator, num_samples, line_num)
+    # sample_generations(generator, num_samples, line_num, word_count)
     
     end_time = time.time()
     print("Time to execute: " + str(end_time-start_time))

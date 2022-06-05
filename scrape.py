@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 import lxml
 
 class Scraper:
+    '''
+    Web scraper object specifically built to get data from Project Gutenberg's page on Emily Dickinson
+    '''
     def __init__(self):
         pass
 
