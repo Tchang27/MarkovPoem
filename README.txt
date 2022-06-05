@@ -24,10 +24,11 @@ How to Run:
 
 Known Issues/Bugs:
     Grammar rules are still being ironed out, as the generated lines
-    usually output nonsensical words around half the time
+    usually output nonsensical words
 
     Working on comma placement, still having issues with commas
-    in relation to independent/dependent clauses
+    in relation to independent/dependent clauses, such as when to add 
+    commas after leading dependent clauses
 
 
 Acknowledgments:
