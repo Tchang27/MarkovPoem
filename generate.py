@@ -50,6 +50,8 @@ class Generator:
             text = re.sub(r'(?=\b[MCDXLVI]{1,6}\b)M{0,4}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})(.)', ' ', text)
             #removes hyphens
             text = re.sub(r'[—]', ' ', text)
+            #removes numbers
+            text  = re.sub(r'[0-9]+', ' ', text)
             text = ' '.join(text.split())
             text = text.lower()
             my_punctuation = string.punctuation.replace("'", "")
@@ -268,5 +270,5 @@ class Generator:
         return ' '.join(punct_line)
 
 if __name__ == '__main__':
-    generator = Generator('text_files/dickinson_poems.txt')
+    generator = Generator('text_files/poe.txt')
     print(generator.generate(10))

@@ -57,9 +57,9 @@ def sample_generations(g, num_samples, line_num, word_count):
     
 if __name__ == '__main__':
     start_time = time.time()
-    generator = Generator('text_files/dickinson_poems.txt')
+    generator = Generator('text_files/romeojuliet.txt')
     #write lines to file w/ accuracy show at the end
-    write_lines_to_file(generator, 'generate_lines.txt', 6, 8)
+    write_lines_to_file(generator, 'generate_lines.txt', 100,8)
 
     #gather 100 samples of 100 lines, and average accuracy
     # accuracy = 0
