@@ -23,7 +23,7 @@ class Generator:
 
         #for text document, which contains all of her poems in their entirety
         self.words = []
-        self.words = self.grab_words('dickinson_poems.txt')
+        self.words = self.grab_words('text_files/romeojuliet.txt')
 
         #make graph
         self.graph = self.generate_graph(self.words)
