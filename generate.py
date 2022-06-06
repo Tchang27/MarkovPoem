@@ -268,5 +268,5 @@ class Generator:
         return ' '.join(punct_line)
 
 if __name__ == '__main__':
-    generator = Generator()
+    generator = Generator('text_files/dickinson_poems.txt')
     print(generator.generate(10))
