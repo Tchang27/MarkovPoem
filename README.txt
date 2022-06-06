@@ -10,9 +10,9 @@ Overview:
 
 How to Run:
     Run generate.py to generate phrases
-        Can either scrape from website, or use text document
-        In the constructor, uncomment lines 17/18 to use scraper; else, the Markov chain 
-        will be built using the text document of emily dickinson's poems
+        The Markov chain will be built using the text document of emily dickinson's 
+        poems which was prescraped from the website
+        Note: the scraper can be used but has limited functionality as of now
     Run writer.py to generate phrases and write them to a text file
         Can measure accuracy of line generator by running sample_generations()
 

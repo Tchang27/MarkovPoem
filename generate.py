@@ -13,9 +13,12 @@ class Generator:
     Generator - object that constructs a Markov chain either by scraping a website 
     or reading a text document, then uses its to generate a line of poetry
     '''
-    def __init__(self):
+    def __init__(self, path):
         '''
         Constructor for Generator
+
+        Parameters:
+        path - file path to text document
         '''
         #for scraping the first lines of every poem
         # scraper = Scraper()
@@ -23,7 +26,7 @@ class Generator:
 
         #for text document, which contains all of her poems in their entirety
         self.words = []
-        self.words = self.grab_words('text_files/romeojuliet.txt')
+        self.words = self.grab_words(path)
 
         #make graph
         self.graph = self.generate_graph(self.words)
