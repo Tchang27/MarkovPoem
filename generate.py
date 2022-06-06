@@ -5,6 +5,8 @@ import nltk
 from nltk.corpus import stopwords
 import re
 import string
+import language_tool_python
+
 
 STOP_WORDS = set(stopwords.words('english'))
 
@@ -30,6 +32,9 @@ class Generator:
 
         #make graph
         self.graph = self.generate_graph(self.words)
+
+        self.grammer_tool = language_tool_python.LanguageTool('en-US')  
+
 
     def grab_words(self,path):
         '''
@@ -248,6 +253,10 @@ class Generator:
 
         return corrected_line
 
+    def correct_line(self, line):
+        return self.grammer_tool.correct(line)
+
+
 
     def generate(self, length):
         '''
@@ -264,11 +273,14 @@ class Generator:
 
         #this cleans the line using my own grammar rules - STILL INCOMPLETE/HAS BUGS
         punct_line = self.clean_line(generated_line)
-
+        punct_line = ' '.join(punct_line)
+        
+        #use Language Tool to correct any remaining mistakes
+        corrected_line = self.correct_line(punct_line)
         
         #print line
-        return ' '.join(punct_line)
+        return corrected_line
 
 if __name__ == '__main__':
-    generator = Generator('text_files/poe.txt')
+    generator = Generator('text_files/dickinson_poems.txt')
     print(generator.generate(10))

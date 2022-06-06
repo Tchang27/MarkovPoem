@@ -22,10 +22,11 @@ def write_lines_to_file(g, path, line_num, word_count):
         if(len(my_matches) > 0):
             num_matches += 1 
         f.write(line + "\n")
-    
+
     f.write('Percent grammatical accuracy according to LanguageTool: ' + str(((line_num-num_matches)/line_num)*100))
 
     f.close()
+    my_tool.close()
 
 def sample_generations(g, num_samples, line_num, word_count):
     '''
@@ -52,12 +53,13 @@ def sample_generations(g, num_samples, line_num, word_count):
         print(((line_num-num_matches)/line_num))
 
     accuracy = accuracy / num_samples
+    my_tool.close()
     print("Average accuracy: " + str(accuracy))
     
     
 if __name__ == '__main__':
     start_time = time.time()
-    generator = Generator('text_files/romeojuliet.txt')
+    generator = Generator('text_files/twilight.txt')
     #write lines to file w/ accuracy show at the end
     write_lines_to_file(generator, 'generate_lines.txt', 100,8)
 
