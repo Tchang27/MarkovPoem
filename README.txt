@@ -1,11 +1,12 @@
 README
-Markov Chain - Emily Dickinson First Line Generator
+Markov Chain - Text Generator
 
 Overview:
     Using data scraped from Project Gutenberg, the program builds
     a Markov Chain using Emily Dickinson's poems. Using the chain,
     it generates a line of poetry in the style of Emily Dickinson.
-    An example of generated lines is found in generate_lines.txt
+    An example of generated lines is found in generate_lines.txt.
+    This program can be applied to other texts with varyng results.
 
 How to Run:
     Run generate.py to generate phrases
