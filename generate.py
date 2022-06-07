@@ -282,5 +282,5 @@ class Generator:
         return corrected_line
 
 if __name__ == '__main__':
-    generator = Generator('text_files/dickinson_poems.txt')
-    print(generator.generate(10))
+    generator = Generator('text_files/poe.txt')
+    print(generator.generate(15))

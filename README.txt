@@ -8,6 +8,16 @@ Overview:
     An example of generated lines is found in generate_lines.txt.
     This program can be applied to other texts with varyng results.
 
+Program Structure:
+graph.py - data structure for the Markov Chain
+scrape.py - optional Object that scrapes text from website. Depending on the website
+            the scraper needs t0 be modified
+generate.py - reads in text data, creates a Markov Chain using the words from the data,
+              generates a line using the Markov Chain, adds commas/cleans grammar, then
+              returns the line
+writer.py - writes generated lines to a file
+text_files - holds example text files to build the markov chain
+
 How to Run:
     Run generate.py to generate phrases
         The Markov chain will be built using the text document of emily dickinson's 
