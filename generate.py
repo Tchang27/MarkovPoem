@@ -181,6 +181,8 @@ class Generator:
                         contains_verb = False
                         contains_subject = False
                         contains_object = False
+                        complete_clause = False
+                        determiner = False
             elif item[1][0] == 'V':
                 if not contains_verb:
                     contains_verb = True
@@ -198,6 +200,8 @@ class Generator:
                         contains_verb = False
                         contains_subject = False
                         contains_object = False
+                        complete_clause = False
+                        determiner = False
            
             #complete clause and doesn't end on a determiner
             if contains_verb and contains_subject and contains_object and not determiner:
@@ -205,6 +209,7 @@ class Generator:
                 contains_verb = False
                 contains_subject = False
                 contains_object = False
+                determiner = False
             
             #if complete clause and it does not end on a verb or doesn't end on a preposition, add comma
             #however, don't add comma if last word
@@ -223,10 +228,6 @@ class Generator:
                         else:
                             item[0] = str(item[0]) + ','
                             line[i] = (item[0], item[1])
-                    contains_verb = False
-                    contains_subject = False
-                    contains_object = False
-                    determiner = False
                     complete_clause = False
 
             #check case of leading clause
@@ -235,6 +236,11 @@ class Generator:
                     prev_item = list(line[i-1])
                     prev_item[0] = str(prev_item[0]) + ','
                     line[i-1] = (prev_item[0], prev_item[1])
+                    contains_verb = False
+                    contains_subject = False
+                    contains_object = False
+                    complete_clause = False
+                    determiner = False
             #set determiner to false again before iterating
             if determiner:
                 previous_pos = 'DETERMINER' 
@@ -253,9 +259,9 @@ class Generator:
 
         return corrected_line
 
+
     def correct_line(self, line):
         return self.grammer_tool.correct(line)
-
 
 
     def generate(self, length):
