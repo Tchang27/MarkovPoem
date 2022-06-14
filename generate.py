@@ -264,7 +264,7 @@ class Generator:
         return self.grammer_tool.correct(line)
 
 
-    def generate(self, length):
+    def generate(self, length, correct):
         '''
         Function that generates a punctuated line using Markov Chain
 
@@ -282,10 +282,11 @@ class Generator:
         punct_line = ' '.join(punct_line)
         
         #use Language Tool to correct any remaining mistakes
-        corrected_line = self.correct_line(punct_line)
+        if correct:
+            punct_line = self.correct_line(punct_line)
         
         #print line
-        return corrected_line
+        return punct_line
 
 if __name__ == '__main__':
     generator = Generator('text_files/poe.txt')

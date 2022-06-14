@@ -17,13 +17,13 @@ def write_lines_to_file(g, path, line_num, word_count):
     f = open(path, 'w')
 
     for _ in range(line_num):
-        line = g.generate(word_count)
+        line = g.generate(word_count, False)
         my_matches = my_tool.check(line) 
         if(len(my_matches) > 0):
             num_matches += 1 
         f.write(line + "\n")
 
-    f.write('Percent grammatical accuracy according to LanguageTool: ' + str(((line_num-num_matches)/line_num)*100))
+    #f.write('Percent grammatical accuracy according to LanguageTool: ' + str(((line_num-num_matches)/line_num)*100))
 
     f.close()
     my_tool.close()
@@ -45,7 +45,7 @@ def sample_generations(g, num_samples, line_num, word_count):
     for _ in range(num_samples):
         num_matches = 0
         for _ in range(line_num):
-            line = g.generate(word_count)
+            line = g.generate(word_count, False)
             my_matches = my_tool.check(line) 
             if(len(my_matches) > 0):
                 num_matches += 1 
@@ -59,7 +59,7 @@ def sample_generations(g, num_samples, line_num, word_count):
     
 if __name__ == '__main__':
     start_time = time.time()
-    generator = Generator('text_files/romeojuliet.txt')
+    generator = Generator('text_files/shakespeare.txt')
     #write lines to file w/ accuracy show at the end
     write_lines_to_file(generator, 'generate_lines.txt', 100, 12)
 
