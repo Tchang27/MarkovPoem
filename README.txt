@@ -34,8 +34,7 @@ How to Run:
     language_tool_python
 
 Known Issues/Bugs:
-    Grammar rules are still being ironed out, as the generated lines
-    usually output nonsensical words
+    Grammar rules are still being ironed out
 
     Working on comma placement, still having issues with commas
     in relation to independent/dependent clauses, such as when to add 
